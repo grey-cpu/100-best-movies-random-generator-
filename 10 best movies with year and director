@@ -1,0 +1,78 @@
+import random
+
+class RandomMoviePicker:
+    def __init__(self, movies):
+        self.movies = movies
+        self.unpicked_movies = list(movies)
+    
+    def pick_movie(self):
+        if not self.unpicked_movies:
+            raise ValueError("All movies have been picked.")
+        picked_movie = random.choice(self.unpicked_movies)
+        self.unpicked_movies.remove(picked_movie)
+        return picked_movie
+
+# List of 100 best movies of all time with year and director
+best_movies = [
+    ("The Godfather", 1972, "Francis Ford Coppola"), ("The Shawshank Redemption", 1994, "Frank Darabont"),
+    ("Schindler's List", 1993, "Steven Spielberg"), ("Raging Bull", 1980, "Martin Scorsese"),
+    ("Casablanca", 1942, "Michael Curtiz"), ("Citizen Kane", 1941, "Orson Welles"),
+    ("Gone with the Wind", 1939, "Victor Fleming"), ("The Wizard of Oz", 1939, "Victor Fleming"),
+    ("One Flew Over the Cuckoo's Nest", 1975, "Milos Forman"), ("Lawrence of Arabia", 1962, "David Lean"),
+    ("Vertigo", 1958, "Alfred Hitchcock"), ("Psycho", 1960, "Alfred Hitchcock"),
+    ("The Godfather Part II", 1974, "Francis Ford Coppola"), ("On the Waterfront", 1954, "Elia Kazan"),
+    ("Sunset Boulevard", 1950, "Billy Wilder"), ("Forrest Gump", 1994, "Robert Zemeckis"),
+    ("The Sound of Music", 1965, "Robert Wise"), ("12 Angry Men", 1957, "Sidney Lumet"),
+    ("West Side Story", 1961, "Robert Wise, Jerome Robbins"), ("Star Wars", 1977, "George Lucas"),
+    ("2001: A Space Odyssey", 1968, "Stanley Kubrick"), ("E.T. the Extra-Terrestrial", 1982, "Steven Spielberg"),
+    ("The Silence of the Lambs", 1991, "Jonathan Demme"), ("Chinatown", 1974, "Roman Polanski"),
+    ("The Bridge on the River Kwai", 1957, "David Lean"), ("Singin' in the Rain", 1952, "Stanley Donen, Gene Kelly"),
+    ("It's a Wonderful Life", 1946, "Frank Capra"), ("Some Like It Hot", 1959, "Billy Wilder"),
+    ("Ben-Hur", 1959, "William Wyler"), ("Apocalypse Now", 1979, "Francis Ford Coppola"),
+    ("Amadeus", 1984, "Milos Forman"), ("The Lord of the Rings: The Return of the King", 2003, "Peter Jackson"),
+    ("Gladiator", 2000, "Ridley Scott"), ("Saving Private Ryan", 1998, "Steven Spielberg"),
+    ("The Green Mile", 1999, "Frank Darabont"), ("Braveheart", 1995, "Mel Gibson"),
+    ("American Beauty", 1999, "Sam Mendes"), ("Titanic", 1997, "James Cameron"),
+    ("Goodfellas", 1990, "Martin Scorsese"), ("The Matrix", 1999, "The Wachowskis"),
+    ("The Lord of the Rings: The Fellowship of the Ring", 2001, "Peter Jackson"),
+    ("The Lord of the Rings: The Two Towers", 2002, "Peter Jackson"), ("Fight Club", 1999, "David Fincher"),
+    ("Inception", 2010, "Christopher Nolan"), ("Pulp Fiction", 1994, "Quentin Tarantino"),
+    ("The Empire Strikes Back", 1980, "Irvin Kershner"), ("The Dark Knight", 2008, "Christopher Nolan"),
+    ("Raiders of the Lost Ark", 1981, "Steven Spielberg"), ("The Godfather Part III", 1990, "Francis Ford Coppola"),
+    ("The Usual Suspects", 1995, "Bryan Singer"), ("Se7en", 1995, "David Fincher"),
+    ("Léon: The Professional", 1994, "Luc Besson"), ("Saving Private Ryan", 1998, "Steven Spielberg"),
+    ("Gladiator", 2000, "Ridley Scott"), ("Schindler's List", 1993, "Steven Spielberg"),
+    ("The Green Mile", 1999, "Frank Darabont"), ("Goodfellas", 1990, "Martin Scorsese"),
+    ("The Shawshank Redemption", 1994, "Frank Darabont"), ("The Departed", 2006, "Martin Scorsese"),
+    ("Forrest Gump", 1994, "Robert Zemeckis"), ("The Godfather Part II", 1974, "Francis Ford Coppola"),
+    ("One Flew Over the Cuckoo's Nest", 1975, "Milos Forman"), ("12 Angry Men", 1957, "Sidney Lumet"),
+    ("The Good, the Bad and the Ugly", 1966, "Sergio Leone"), ("Inception", 2010, "Christopher Nolan"),
+    ("Star Wars", 1977, "George Lucas"), ("The Matrix", 1999, "The Wachowskis"),
+    ("The Empire Strikes Back", 1980, "Irvin Kershner"), ("The Godfather Part II", 1974, "Francis Ford Coppola"),
+    ("The Lord of the Rings: The Fellowship of the Ring", 2001, "Peter Jackson"), ("Fight Club", 1999, "David Fincher"),
+    ("Forrest Gump", 1994, "Robert Zemeckis"), ("Pulp Fiction", 1994, "Quentin Tarantino"),
+    ("The Good, the Bad and the Ugly", 1966, "Sergio Leone"), ("The Dark Knight", 2008, "Christopher Nolan"),
+    ("The Godfather Part III", 1990, "Francis Ford Coppola"), ("The Silence of the Lambs", 1991, "Jonathan Demme"),
+    ("The Usual Suspects", 1995, "Bryan Singer"), ("Schindler's List", 1993, "Steven Spielberg"),
+    ("Inception", 2010, "Christopher Nolan"), ("The Departed", 2006, "Martin Scorsese"),
+    ("Gladiator", 2000, "Ridley Scott"), ("Saving Private Ryan", 1998, "Steven Spielberg"),
+    ("Goodfellas", 1990, "Martin Scorsese"), ("The Shawshank Redemption", 1994, "Frank Darabont"),
+    ("Forrest Gump", 1994, "Robert Zemeckis"), ("Braveheart", 1995, "Mel Gibson"),
+    ("American Beauty", 1999, "Sam Mendes"), ("Titanic", 1997, "James Cameron"),
+    ("Schindler's List", 1993, "Steven Spielberg"), ("One Flew Over the Cuckoo's Nest", 1975, "Milos Forman"),
+    ("The Godfather", 1972, "Francis Ford Coppola"), ("The Godfather Part II", 1974, "Francis Ford Coppola"),
+    ("The Lord of the Rings: The Return of the King", 2003, "Peter Jackson"), ("Pulp Fiction", 1994, "Quentin Tarantino"),
+    ("The Matrix", 1999, "The Wachowskis"), ("The Empire Strikes Back", 1980, "Irvin Kershner"),
+    ("Raiders of the Lost Ark", 1981, "Steven Spielberg"), ("The Silence of the Lambs", 1991, "Jonathan Demme"),
+    ("Saving Private Ryan", 1998, "Steven Spielberg"), ("The Departed", 2006, "Martin Scorsese"),
+    ("Forrest Gump", 1994, "Robert Zemeckis"), ("Goodfellas", 1990, "Martin Scorsese")
+]
+
+picker = RandomMoviePicker(best_movies)
+
+# Pick a movie
+try:
+    movie = picker.pick_movie()
+    print(f"Movie: {movie[0]}, Year: {movie[1]}, Director: {movie[2]}")
+except ValueError:
+    print("All movies have been picked.")
